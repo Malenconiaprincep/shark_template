@@ -29,7 +29,7 @@ module.exports = class extends Generator {
   }
 
   configuring() {
-    let fcontent = this.fs.read('sdkjs/word/module/index.js')
+    let fcontent = this.fs.read('sdkjs/Editor/Document-Module/index.js')
 
     const regImport = new RegExp('// import')
     const regExport = new RegExp('// export')
@@ -41,12 +41,12 @@ module.exports = class extends Generator {
   writing() {
     this.fs.copyTpl(
       this.templatePath('module.ejs'),
-      this.destinationPath(`sdkjs/word/module/${this.moduleName}.module.js`),
+      this.destinationPath(`sdkjs/Editor/Document-Module/${this.moduleName}.module.js`),
       { moduleName: this.moduleName }
     )
   }
 
   end() {
-    this.fs.write(`sdkjs/word/module/index.js`, this.fcontent)
+    this.fs.write(`sdkjs/Editor/Document-Module/index.js`, this.fcontent)
   }
 }
