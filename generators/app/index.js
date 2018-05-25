@@ -4,7 +4,7 @@ function addModule(fcontent, reg, moduleName, onlyName) {
   const index = fcontent.match(reg).index
   const fleft = fcontent.substring(0, index)
   const fcenter = onlyName
-    ? `${moduleName},`
+    ? `,${moduleName}`
     : `import ${moduleName} from './${moduleName}.module'`
   const br = '\n'
   const fright = fcontent.substring(index)
@@ -29,7 +29,7 @@ module.exports = class extends Generator {
   }
 
   configuring() {
-    let fcontent = this.fs.read('sdkjs/Editor/Document-Module/index.js')
+    let fcontent = this.fs.read('sdkjs/word/Editor/Document-Module/index.js')
 
     const regImport = new RegExp('// import')
     const regExport = new RegExp('// export')
@@ -41,12 +41,12 @@ module.exports = class extends Generator {
   writing() {
     this.fs.copyTpl(
       this.templatePath('module.ejs'),
-      this.destinationPath(`sdkjs/Editor/Document-Module/${this.moduleName}.module.js`),
+      this.destinationPath(`sdkjs/word/Editor/Document-Module/${this.moduleName}.module.js`),
       { moduleName: this.moduleName }
     )
   }
 
   end() {
-    this.fs.write(`sdkjs/Editor/Document-Module/index.js`, this.fcontent)
+    this.fs.write(`sdkjs/word/Editor/Document-Module/index.js`, this.fcontent)
   }
 }
